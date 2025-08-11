@@ -58,6 +58,6 @@ public enum ScreenOptions {
                 return screenOption;
             }
         }
-        throw new RuntimeException("There is no selected option");
+        throw new RuntimeException("Nenhuma opção selecionada");
     }
 }
