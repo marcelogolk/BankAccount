@@ -1,4 +1,5 @@
 package ada.tech.lms.screen;
+
 import ada.tech.lms.domain.SimpleAccount;
 import ada.tech.lms.domain.User;
 import ada.tech.lms.service.BankService;
@@ -6,12 +7,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Classe pertencente ao pacote screen, representando a camada View do projeto.
- * Implementa a interface ExecutedOption para executar a ação de criação de uma nova conta bancária.
- * Solicita ao cliente a entrada de CPF e nome, gera um número de conta aleatório e
- * cria uma nova conta simples associada a um novo cliente.
+ * Classe da camada View responsável pela criação de uma nova conta bancária simples.
+ * Solicita CPF e nome do cliente, gera número de conta aleatório e cria a conta associada.
  *
- * Responsável por interagir com o usuário e comunicar o serviço bancário (BankService) para adicionar a conta.
+ * Interage com o BankService para adicionar a conta criada.
  *
  * @author Matheus Alves Sousa
  * @version 1.0
@@ -21,15 +20,15 @@ import java.util.Scanner;
  * @see ada.tech.lms.domain.User
  */
 public class CreateAccountExecutedOption implements ExecutedOption {
+
 	private BankService bankService;
 	private Scanner scanner;
 
 	/**
-	 * Construtor que recebe as dependências necessárias para a execução da criação da conta:
-	 * o serviço bancário responsável pelo gerenciamento das contas e o scanner para entrada do usuário.
+	 * Construtor recebendo as dependências de criação de conta.
 	 *
-	 * @param bankService serviço bancário para gerenciar contas
-	 * @param scanner scanner para entrada de dados do usuário
+	 * @param bankService serviço responsável pelo gerenciamento de contas
+	 * @param scanner scanner para leitura da entrada do usuário
 	 */
 	public CreateAccountExecutedOption(BankService bankService, Scanner scanner) {
 		this.bankService = bankService;
@@ -37,9 +36,11 @@ public class CreateAccountExecutedOption implements ExecutedOption {
 	}
 
 	/**
-	 * Executa a criação de uma nova conta simples.
-	 * Solicita CPF e nome do cliente, gera um número de conta aleatório,
-	 * cria o objeto User e SimpleAccount, adicionando a conta ao serviço bancário.
+	 * Executa a criação da conta:
+	 * - Solicita CPF e nome ao usuário
+	 * - Gera número aleatório de conta
+	 * - Cria um User e SimpleAccount
+	 * - Adiciona a conta ao serviço bancário
 	 */
 	@Override
 	public void execute() {
@@ -53,9 +54,9 @@ public class CreateAccountExecutedOption implements ExecutedOption {
 	}
 
 	/**
-	 * Gera um número de conta aleatório de 6 dígitos para a nova conta.
+	 * Gera número aleatório de 6 dígitos para a conta.
 	 *
-	 * @return número da conta gerado como String
+	 * @return número gerado como String
 	 */
 	private String generateAccountNumber() {
 		var random = new Random();

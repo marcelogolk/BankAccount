@@ -1,26 +1,27 @@
 package ada.tech.lms.domain;
 
 /**
- * Classe concreta pertencente ao pacote domain, que representa a camada Model do projeto.
- * Define uma conta bancária especial com limite adicional que permite saques além do saldo.
+ * Representa uma conta bancária especial do sistema,
+ * que permite saques além do saldo disponível até um limite adicional definido.
+ *
+ * Estende a classe abstrata BankAccount e implementa a lógica específica de saque considerando limite.
  *
  * @author Matheus Alves Sousa
  * @version 1.0
  * @see ada.tech.lms.domain.BankAccount
  */
-
 public class SpecialAccount extends BankAccount {
 
     /** Limite especial que permite saque além do saldo */
     private double limit;
 
     /**
-     * Construtor que inicializa uma conta especial com número, cliente, saldo e limite.
+     * Constrói uma conta especial com número, proprietário, saldo inicial e limite de crédito.
      *
-     * @param accountNumber Número da conta
-     * @param owner Cliente do banco proprietário da conta
-     * @param balance Saldo inicial da conta
-     * @param limit Limite especial disponível para saque
+     * @param accountNumber Número único da conta
+     * @param owner Cliente proprietário da conta
+     * @param balance Saldo inicial da conta, valor pode ser zero ou positivo
+     * @param limit Limite especial para saques além do saldo disponível, deve ser positivo
      */
     public SpecialAccount(String accountNumber, User owner, double balance, double limit) {
         super(accountNumber, owner, balance);
@@ -28,25 +29,32 @@ public class SpecialAccount extends BankAccount {
     }
 
     /**
-     * Realiza saque verificando se o valor está dentro do saldo disponível mais o limite.
-     * Lança exceção se o valor ultrapassar esse limite.
+     * Realiza o saque considerando saldo disponível e limite especial.
      *
-     * @param amount Valor a ser sacado
-     * @throws IllegalArgumentException se o valor exceder saldo + limite
+     * O valor do saque deve ser positivo e não exceder saldo + limite.
+     * Caso ultrapasse, lança exceção.
+     * Também registra a transação em caso de sucesso.
+     *
+     * @param amount Valor a ser sacado, maior que zero
+     * @throws IllegalArgumentException se valor inválido ou ultrapassar saldo + limite
      */
     @Override
     public void withdraw(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("O valor do saque deve ser positivo.");
+        }
         if (amount <= balance + limit) {
             balance -= amount;
+            transactions.add(new Transaction(Transaction.TransactionType.WITHDRAW, amount));
         } else {
             throw new IllegalArgumentException("Valor ultrapassa o saldo e limite da conta.");
         }
     }
 
     /**
-     * Retorna o limite especial disponível nesta conta.
+     * Retorna o limite especial de crédito disponível na conta.
      *
-     * @return Limite especial como double
+     * @return limite especial
      */
     public double getLimit() {
         return limit;

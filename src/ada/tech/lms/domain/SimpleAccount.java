@@ -1,38 +1,48 @@
 package ada.tech.lms.domain;
 
 /**
- * Classe concreta pertencente ao pacote domain, que representa a camada Model do projeto.
- * Define uma conta bancária simples, com regras para saques respeitando o saldo disponível.
+ * Representa uma conta bancária simples do sistema,
+ * que permite saques dentro do limite do saldo disponível,
+ * sem limites especiais.
+ *
+ * Estende a classe abstrata BankAccount e implementa a lógica específica de saque.
  *
  * @author Matheus Alves Sousa
  * @version 1.0
  * @see ada.tech.lms.domain.BankAccount
  */
-
 public class SimpleAccount extends BankAccount {
 
     /**
-     * Construtor que inicializa uma conta simples com número, cliente e saldo.
+     * Constrói uma conta simples com o número da conta, proprietário e saldo inicial.
      *
-     * @param accountNumber Número da conta
-     * @param owner Cliente do banco proprietário da conta
-     * @param balance Saldo inicial da conta
+     * @param accountNumber Número único da conta bancária
+     * @param owner Cliente proprietário da conta
+     * @param balance Saldo inicial da conta, valor pode ser zero ou positivo
      */
     public SimpleAccount(String accountNumber, User owner, double balance) {
         super(accountNumber, owner, balance);
     }
 
     /**
-     * Realiza o saque na conta se o valor for menor ou igual ao saldo disponível.
-     * Lança exceção caso o saldo seja insuficiente.
+     * Realiza o saque na conta simples.
      *
-     * @param amount Valor a ser sacado
-     * @throws IllegalArgumentException se o saldo for insuficiente
+     * O valor do saque deve ser positivo e menor ou igual ao saldo disponível.
+     * Caso o saldo seja insuficiente, lança exceção.
+     *
+     * Também registra a transação em caso de sucesso.
+     *
+     * @param amount Valor a ser sacado, maior que zero
+     * @throws IllegalArgumentException se o valor for inválido ou saldo insuficiente
      */
     @Override
     public void withdraw(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("O valor do saque deve ser positivo.");
+        }
         if (amount <= balance) {
             balance -= amount;
+            transactions.add(new Transaction(Transaction.TransactionType.WITHDRAW, amount));
         } else {
             throw new IllegalArgumentException("Saldo insuficiente.");
         }

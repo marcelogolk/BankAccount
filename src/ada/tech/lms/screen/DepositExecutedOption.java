@@ -1,14 +1,14 @@
 package ada.tech.lms.screen;
+
 import ada.tech.lms.domain.User;
 import ada.tech.lms.service.BankService;
 import java.util.Scanner;
 
 /**
- * Classe pertencente ao pacote screen, representando a camada View do projeto.
- * Implementa a interface ExecutedOption para executar a ação de depósito em uma conta bancária.
- * Solicita ao cliente o valor a ser depositado e realiza o depósito na conta associada ao cliente informado.
+ * Classe da camada View responsável por executar a operação de depósito em conta bancária.
+ * Solicita ao cliente o valor do depósito e realiza a atualização do saldo na conta associada.
  *
- * Utiliza o serviço bancário (BankService) para localizar a conta do cliente e atualizar o saldo.
+ * Utiliza o serviço bancário (BankService) para localizar a conta correta e executar o depósito.
  *
  * @author Matheus Alves Sousa
  * @version 1.0
@@ -22,12 +22,11 @@ public class DepositExecutedOption implements ExecutedOption {
 	private final User user;
 
 	/**
-	 * Construtor que recebe as dependências necessárias para a execução do depósito:
-	 * o serviço bancário, o scanner para entrada de dados e o usuário cliente da conta.
+	 * Construtor que recebe as dependências necessárias para processar o depósito.
 	 *
-	 * @param bankService serviço bancário para operações
-	 * @param scanner scanner para entrada
-	 * @param user cliente do banco que realizará o depósito
+	 * @param bankService serviço bancário responsável pelas operações
+	 * @param scanner scanner para leitura dos dados do usuário
+	 * @param user cliente que realizará o depósito
 	 */
 	public DepositExecutedOption(BankService bankService, Scanner scanner, User user) {
 		this.bankService = bankService;
@@ -36,14 +35,15 @@ public class DepositExecutedOption implements ExecutedOption {
 	}
 
 	/**
-	 * Executa a ação de depósito solicitando ao cliente o valor e adicionando à conta associada ao usuário.
+	 * Executa a operação de depósito:
+	 * - Solicita o valor do depósito ao usuário
+	 * - Realiza o depósito na conta associada ao usuário informado
 	 */
 	@Override
 	public void execute() {
 		System.out.println("Qual o valor que deseja depositar?");
 		var value = scanner.nextDouble();
 		bankService.findAccountByUser(user).deposit(value);
-		System.out.println("deposito realizado com sucesso");
+		System.out.println("Depósito realizado com sucesso");
 	}
 }
-

@@ -1,4 +1,9 @@
 package ada.tech.lms.domain;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Classe abstrata pertencente ao pacote domain, que representa a camada Model do projeto.
  * Representa a conta bancária do cliente, com número, proprietário (cliente) e saldo,
@@ -9,7 +14,6 @@ package ada.tech.lms.domain;
  * @see ada.tech.lms.domain.SimpleAccount
  * @see ada.tech.lms.domain.SpecialAccount
  */
-
 public abstract class BankAccount {
     /** Número que identifica unicamente a conta bancária */
     protected String accountNumber;
@@ -19,6 +23,8 @@ public abstract class BankAccount {
 
     /** Saldo disponível na conta */
     protected double balance;
+
+    protected List<Transaction> transactions = new ArrayList<>();
 
     /**
      * Construtor que inicializa a conta bancária com número, cliente e saldo inicial.
@@ -34,26 +40,40 @@ public abstract class BankAccount {
     }
 
     /**
-     * Método abstrato que realiza a retirada de um valor da conta.
-     * Deve ser implementado nas subclasses para definir a lógica de saque.
+     * Retorna uma lista imutável de transações realizadas na conta.
      *
-     * @param amount Quantia a ser retirada
+     * @return lista das transações da conta
+     */
+    public List<Transaction> getTransactions() {
+        return Collections.unmodifiableList(transactions);
+    }
+
+    /**
+     * Método abstrato para realizar saque da conta.
+     * Deve ser implementado nas subclasses para definir a lógica específica de saque.
+     *
+     * @param amount Valor a ser sacado
      */
     public abstract void withdraw(double amount);
 
     /**
-     * Realiza depósito de um valor na conta, aumentando o saldo.
+     * Realiza depósito de um valor na conta.
      *
-     * @param amount Quantia a ser depositada
+     * @param amount Valor a ser depositado
+     * @throws IllegalArgumentException se o valor depositado for igual ou menor que zero
      */
     public void deposit(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("O valor do depósito deve ser positivo.");
+        }
         this.balance += amount;
+        transactions.add(new Transaction(Transaction.TransactionType.DEPOSIT, amount));
     }
 
     /**
-     * Obtém o saldo atual da conta.
+     * Retorna o saldo atual da conta.
      *
-     * @return Saldo disponível (double)
+     * @return saldo disponível
      */
     public double getBalance() {
         return balance;
@@ -62,16 +82,16 @@ public abstract class BankAccount {
     /**
      * Retorna o número da conta bancária.
      *
-     * @return Número da conta como String
+     * @return número da conta
      */
     public String getAccountNumber() {
         return accountNumber;
     }
 
     /**
-     * Retorna o proprietário (Cliente) da conta.
+     * Retorna o cliente proprietário da conta.
      *
-     * @return Objeto User associado à conta
+     * @return objeto User proprietário
      */
     public User getOwner() {
         return owner;
