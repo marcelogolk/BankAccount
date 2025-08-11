@@ -1,14 +1,13 @@
 package ada.tech.lms.screen;
+
 import ada.tech.lms.domain.BankAccount;
 import ada.tech.lms.domain.User;
 import ada.tech.lms.service.BankService;
 
 /**
- * Classe pertencente ao pacote screen, representando a camada View do projeto.
- * Implementa a interface ExecutedOption para executar a ação de consulta de saldo de uma conta bancária.
- * Busca a conta associada ao cliente informado e exibe o saldo disponível.
- *
- * Utiliza o serviço bancário (BankService) para localizar a conta do cliente.
+ * Classe da camada View responsável por executar a consulta de saldo
+ * em uma conta bancária associada a um cliente.
+ * Utiliza o serviço bancário para localizar a conta do cliente e exibir o saldo atual.
  *
  * @author Matheus Alves Sousa
  * @version 1.0
@@ -22,11 +21,10 @@ public class GetBalanceExecutedOption implements ExecutedOption {
 	private final User user;
 
 	/**
-	 * Construtor que recebe as dependências necessárias para execução da consulta:
-	 * o serviço bancário e o cliente cuja conta será consultada.
+	 * Construtor que recebe as dependências necessárias para execução da consulta.
 	 *
 	 * @param bankService serviço bancário para operações
-	 * @param user cliente do banco para consulta de saldo
+	 * @param user cliente cuja conta será consultada
 	 */
 	public GetBalanceExecutedOption(BankService bankService, User user) {
 		this.bankService = bankService;
@@ -34,14 +32,14 @@ public class GetBalanceExecutedOption implements ExecutedOption {
 	}
 
 	/**
-	 * Executa a ação de consulta do saldo da conta associada ao cliente.
-	 * Exibe o número da conta e o saldo formatado.
+	 * Executa a consulta de saldo da conta associada ao cliente.
+	 * Exibe o número da conta e o saldo formatado com duas casas decimais.
 	 */
 	@Override
 	public void execute() {
 		BankAccount account = bankService.findAccountByUser(user);
-		System.out.printf("Saldo na conta %s é de %.2f %n", account.getAccountNumber(),
+		System.out.printf("Saldo na conta %s é de %.2f %n",
+				account.getAccountNumber(),
 				account.getBalance());
 	}
 }
-
