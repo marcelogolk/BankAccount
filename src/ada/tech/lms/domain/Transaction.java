@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
  * Implementa {@link Comparable} para permitir ordenação cronológica das transações.
  *
  * @author Marcelo Guimarães Carvalho
+ * @author Ramon da Rocha Pereira
+ * @author Jane de Sousa Sales
  * @version 1.0
  */
 public class Transaction implements Comparable<Transaction> {
