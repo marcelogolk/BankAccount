@@ -10,7 +10,7 @@ import ada.tech.lms.service.BankService;
  * Utiliza o serviço bancário para localizar a conta do cliente e exibir o saldo atual.
  *
  * @author Matheus Alves Sousa
- * @version 1.0
+ * @version 1.1
  * @see ada.tech.lms.screen.ExecutedOption
  * @see ada.tech.lms.service.BankService
  * @see ada.tech.lms.domain.User

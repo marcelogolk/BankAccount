@@ -6,7 +6,7 @@ package ada.tech.lms.screen;
  * garantindo que todas as opções implementem o método execute para realizar sua ação.
  *
  * @author Matheus Alves Sousa
- * @version 1.0
+ * @version 1.1
  */
 public interface ExecutedOption {
 

@@ -5,7 +5,7 @@ package ada.tech.lms.domain;
  * Pode estar associado a uma ou mais contas bancárias no sistema.
  *
  * @author Matheus Alves Sousa
- * @version 1.0
+ * @version 1.1
  */
 public class User {
     /** CPF do cliente, usado como identificador único */

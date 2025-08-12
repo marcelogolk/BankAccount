@@ -12,7 +12,7 @@ import java.util.List;
  * Fornece métodos para localizar contas ou usuários por número da conta ou CPF.
  *
  * @author Matheus Alves
- * @version 1.0
+ * @version 1.1
  * @see ada.tech.lms.domain.BankAccount
  * @see ada.tech.lms.domain.User
  */

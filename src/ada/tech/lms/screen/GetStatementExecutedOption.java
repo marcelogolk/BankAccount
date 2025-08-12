@@ -18,7 +18,7 @@ import java.util.List;
  * Utiliza o serviço bancário para buscar a conta e obter suas transações.
  *
  * @author Marcelo Guimarães Carvalho
- * @version 1.0
+ * @version 1.1
  * @see ada.tech.lms.screen.ExecutedOption
  * @see ada.tech.lms.service.BankService
  * @see ada.tech.lms.domain.BankAccount

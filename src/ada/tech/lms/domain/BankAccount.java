@@ -10,7 +10,7 @@ import java.util.List;
  * definindo operações básicas como depósito e saque (abstrato).
  *
  * @author Matheus Alves Sousa
- * @version 1.0
+ * @version 1.1
  * @see ada.tech.lms.domain.SimpleAccount
  * @see ada.tech.lms.domain.SpecialAccount
  */
