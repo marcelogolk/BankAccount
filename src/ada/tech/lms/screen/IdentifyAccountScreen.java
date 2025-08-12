@@ -14,7 +14,7 @@ import java.util.Scanner;
  * Atua como uma tela de entrada para autenticação ou seleção de cliente durante operações.
  *
  * @author Matheus Alves Sousa
- * @version 1.0
+ * @version 1.1
  * @see ada.tech.lms.service.BankService
  * @see ada.tech.lms.domain.User
  */

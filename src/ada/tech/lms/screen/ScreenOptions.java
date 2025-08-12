@@ -7,7 +7,7 @@ package ada.tech.lms.screen;
  * As opções contemplam criação de conta, saque, depósito, consulta de saldo, extrato e saída do sistema.
  *
  * @author Matheus Alves Sousa
- * @version 1.0
+ * @version 1.1
  */
 public enum ScreenOptions {
 

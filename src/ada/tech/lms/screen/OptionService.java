@@ -9,7 +9,7 @@ import java.util.Scanner;
  * coordenando as interações com outras classes da camada View e da camada Service.
  *
  * @author Matheus Alves Sousa
- * @version 1.0
+ * @version 1.1
  * @see ada.tech.lms.screen.ExecutedOption
  * @see ada.tech.lms.screen.ScreenOptions
  * @see ada.tech.lms.service.BankService

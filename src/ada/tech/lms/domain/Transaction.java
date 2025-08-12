@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @author Marcelo Guimarães Carvalho
  * @author Ramon da Rocha Pereira
  * @author Jane de Sousa Sales
- * @version 1.0
+ * @version 1.1
  */
 public class Transaction implements Comparable<Transaction> {
 

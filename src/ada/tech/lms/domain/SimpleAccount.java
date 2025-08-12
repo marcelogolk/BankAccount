@@ -8,7 +8,7 @@ package ada.tech.lms.domain;
  * Estende a classe abstrata BankAccount e implementa a lógica específica de saque.
  *
  * @author Matheus Alves Sousa
- * @version 1.0
+ * @version 1.1
  * @see ada.tech.lms.domain.BankAccount
  */
 public class SimpleAccount extends BankAccount {

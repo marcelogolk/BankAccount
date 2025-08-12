@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Interage com o BankService para adicionar a conta criada.
  *
  * @author Matheus Alves Sousa
- * @version 1.0
+ * @version 1.1
  * @see ada.tech.lms.screen.ExecutedOption
  * @see ada.tech.lms.service.BankService
  * @see ada.tech.lms.domain.SimpleAccount
