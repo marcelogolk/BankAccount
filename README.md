@@ -34,4 +34,4 @@ Para dúvidas ou sugestões, entre em contato com os participantes:
 
 - **Marcelo Guimarães Carvalho** — [marcelo.g.olk@gmail.com](mailto:marcelo.g.olk@gmail.com)
 - **Jane de Sousa Sales** — [janessales@gmail.com](mailto:janessales@gmail.com)
-- **Ramon da Rocha Pereira** — [ramon@ramon](mailto:ramon@ramon)
+- **Ramon da Rocha Pereira** — [ramonrp777@yahoo.com](mailto:ramon@ramon)
