@@ -62,10 +62,10 @@ public class GetStatementExecutedOption implements ExecutedOption {
 
         List<Transaction> sortedTransactions = new ArrayList<>(transactions);
         Collections.sort(sortedTransactions);
-
-        System.out.println("Extrato da conta " + account.getAccountNumber() + ":");
-        System.out.println("Data/Hora           | Tipo                 | Valor    | Saldo Atual");
-        System.out.println("---------------------------------------------------------------------");
+        System.out.println("Nome: " + user.getName() + "      | CPF: " + user.getCpf());
+        System.out.println("Extrato da conta " + account.getAccountNumber());
+        System.out.println("Data/Hora           | Tipo       | Valor              | Saldo Atual");
+        System.out.println("==========================================================================");
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
@@ -101,7 +101,8 @@ public class GetStatementExecutedOption implements ExecutedOption {
                     saldoAtual);
         }
 
-        System.out.println("---------------------------------------------------------------------");
-        System.out.printf("Saldo final:                                             R$ %15.2f%n", account.getBalance());
+        System.out.println("==========================================================================");
+        System.out.printf("Saldo final:                                            R$ %15.2f%n", account.getBalance());
+        System.out.println("==========================================================================");
     }
 }
