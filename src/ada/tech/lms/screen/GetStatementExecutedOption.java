@@ -14,7 +14,6 @@ import java.util.List;
  * Classe da camada View que implementa a operação de consulta e exibição do extrato bancário.
  * Exibe as transações da conta ordenadas por data, incluindo saldo inicial,
  * movimentações e saldo atualizado após cada transação.
- *
  * Utiliza o serviço bancário para buscar a conta e obter suas transações.
  *
  * @author Marcelo Guimarães Carvalho
@@ -43,7 +42,6 @@ public class GetStatementExecutedOption implements ExecutedOption {
 
     /**
      * Executa a exibição do extrato bancário.
-     *
      * Este método realiza as seguintes ações:
      * <ul>
      *   <li>Obtém a conta bancária associada ao usuário informado.</li>
@@ -69,7 +67,7 @@ public class GetStatementExecutedOption implements ExecutedOption {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-        double saldoAtual = 0.0;
+        double saldoAtual;
 
         if (sortedTransactions.isEmpty()) {
             saldoAtual = account.getBalance();
