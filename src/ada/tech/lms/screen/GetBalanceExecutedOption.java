@@ -42,6 +42,5 @@ public class GetBalanceExecutedOption implements ExecutedOption {
 		System.out.printf("Saldo disponível da conta %s: R$ %.2f %n",
 				account.getAccountNumber(),
 				account.getBalance());
-		System.out.println();
 	}
 }
