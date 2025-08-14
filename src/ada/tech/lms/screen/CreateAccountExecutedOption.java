@@ -28,7 +28,7 @@ public class CreateAccountExecutedOption implements ExecutedOption {
 	 * Construtor recebendo as dependências de criação de conta.
 	 *
 	 * @param bankService serviço responsável pelo gerenciamento de contas
-	 * @param scanner scanner para leitura da entrada do usuário
+	 * @param scanner     scanner para leitura da entrada do usuário
 	 */
 	public CreateAccountExecutedOption(BankService bankService, Scanner scanner) {
 		this.bankService = bankService;
@@ -44,26 +44,47 @@ public class CreateAccountExecutedOption implements ExecutedOption {
 	 */
 	@Override
 	public void execute() {
-		System.out.println("Informe o CPF");
-		var cpf = scanner.next();
-		System.out.println("Informe o Nome do usuário");
-		var name = scanner.next();
-		var generatedAccountNumber = generateAccountNumber();
-		bankService.addAccount(new SimpleAccount(generatedAccountNumber, new User(cpf, name), 0.0));
-		System.out.println("Conta criada com sucesso");
-	}
+		String cpf = promptForInput("Informe o CPF", "CPF não pode estar em branco, digite apenas números!");
+		String name = promptForInput("Informe o Nome do usuário", "Nome não pode estar em branco, digite o nome.");
+		try {
+				var generatedAccountNumber = generateAccountNumber();
+				bankService.addAccount(new SimpleAccount(generatedAccountNumber, new User(cpf, name), 0.0));
+				System.out.println("Conta criada com sucesso");
+			}
+			catch (IllegalArgumentException exception) {
+				System.out.println(exception.getMessage());
+			}
 
-	/**
-	 * Gera número aleatório de 6 dígitos para a conta.
-	 *
-	 * @return número gerado como String
-	 */
-	private String generateAccountNumber() {
-		var random = new Random();
-		StringBuilder stringBuilder = new StringBuilder();
-		for (int i = 0; i < 6; i++) {
-			stringBuilder.append(random.nextInt(0, 9));
-		}
-		return stringBuilder.toString();
 	}
-}
+		/**
+		 * Gera número aleatório de 6 dígitos para a conta.
+		 *
+		 * @return número gerado como String
+		 */
+		private String generateAccountNumber () {
+			var random = new Random();
+			StringBuilder stringBuilder = new StringBuilder();
+			for (int i = 0; i < 6; i++) {
+				stringBuilder.append(random.nextInt(0, 9));
+			}
+			return stringBuilder.toString();
+		}
+	/**
+	 * Solicita uma entrada do usuário e valida se não está em branco.
+	 *
+	 * @param prompt Mensagem de solicitação.
+	 * @param errorMessage Mensagem de erro se a entrada estiver em branco.
+	 * @return Entrada válida do usuário.
+	 */
+
+	private String promptForInput(String prompt, String errorMessage) {
+		while (true) {
+			System.out.println(prompt);
+			var input = scanner.nextLine().trim();
+			if (!input.isEmpty()) {
+				return input;
+			}
+			System.out.println(errorMessage);
+		}
+	}
+	}

@@ -38,7 +38,8 @@ public class GetBalanceExecutedOption implements ExecutedOption {
 	@Override
 	public void execute() {
 		BankAccount account = bankService.findAccountByUser(user);
-		System.out.printf("Saldo na conta %s é de %.2f %n",
+		System.out.println("Nome: " + user.getName() + "    |  CPF: " + user.getCpf() );
+		System.out.printf("Saldo disponível da conta %s: R$ %.2f %n",
 				account.getAccountNumber(),
 				account.getBalance());
 	}

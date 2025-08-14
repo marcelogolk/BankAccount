@@ -58,6 +58,6 @@ public enum ScreenOptions {
                 return screenOption;
             }
         }
-        throw new RuntimeException("Nenhuma opção selecionada");
+        throw new IllegalArgumentException("Opção inválida: " + option);
     }
 }

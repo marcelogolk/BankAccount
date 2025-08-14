@@ -39,18 +39,28 @@ public class Main {
 	 * @param scanner Scanner para leitura de entrada do usuário
 	 */
 	private static void showDisplayOptions(Scanner scanner) {
-		int option = 0;
 		BankService bankService = new BankService();
 		OptionService optionService = new OptionService(bankService, scanner);
-
-		do {
+		while (true) {
 			for (ScreenOptions screenOption : ScreenOptions.values()) {
 				System.out.println(String.format("%d - %s",
 						screenOption.getOption(), screenOption.getOptionDescription()));
 			}
-			option = scanner.nextInt();
-			optionService.chooseOption(ScreenOptions.getScreenOption(option));
-		} while (option != 0);
+			String input = scanner.nextLine();
+			try {
+				int option = Integer.parseInt(input);
+				ScreenOptions screenOption = ScreenOptions.getScreenOption(option);
+				if (screenOption == ScreenOptions.NO_OPITION) {
+					System.out.println("Encerrando a aplicação...");
+					break;
+				}
+				optionService.chooseOption(screenOption);
+			} catch (NumberFormatException exception){
+				System.out.println("Opção inválida, tente novamente!");
+			}catch (IllegalArgumentException exception) {
+				System.out.println(exception.getMessage());
+			}
+		}
 	}
 }
 
