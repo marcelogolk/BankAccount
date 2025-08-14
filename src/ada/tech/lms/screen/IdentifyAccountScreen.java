@@ -39,12 +39,12 @@ public class IdentifyAccountScreen {
 	 */
 	public User init(Scanner scanner){
 		System.out.println("Informe o cpf da sua conta");
-		return bankService.findUser(scanner.next());
+		return bankService.findUser(scanner.nextLine());
 	}
 
 	public BankAccount AccountInit(Scanner scanner){
 		System.out.println("Informe o cpf da sua conta");
-		return bankService.findAccount(scanner.next());
+		return bankService.findAccount(scanner.nextLine());
 	}
 }
 
