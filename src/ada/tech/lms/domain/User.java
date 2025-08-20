@@ -14,6 +14,14 @@ public class User {
     /** Nome completo do cliente */
     private String name;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     /**
      * Constrói um cliente com CPF e nome.
      *
@@ -24,7 +32,9 @@ public class User {
         this.cpf = id;
         this.name = name;
     }
+    public User(){
 
+    }
     /**
      * Retorna o CPF do cliente.
      *
