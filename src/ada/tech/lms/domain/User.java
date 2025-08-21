@@ -25,6 +25,9 @@ public class User {
         this.name = name;
     }
 
+    public User() {
+    }
+
     /**
      * Retorna o CPF do cliente.
      *
@@ -41,5 +44,13 @@ public class User {
      */
     public String getName() {
         return name;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

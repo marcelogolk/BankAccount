@@ -40,6 +40,11 @@ public class Transaction implements Comparable<Transaction> {
         this.amount = amount;
         this.dateTime = LocalDateTime.now();
     }
+    public Transaction(TransactionType type, double amount, LocalDateTime dateTime) {
+        this.type = type;
+        this.amount = amount;
+        this.dateTime = dateTime;
+    }
 
     /**
      * Retorna o tipo da transação.
