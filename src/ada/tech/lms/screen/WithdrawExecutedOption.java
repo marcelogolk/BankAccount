@@ -45,6 +45,7 @@ public class WithdrawExecutedOption implements ExecutedOption {
 	public void execute() {
 		System.out.println("Valor informado para o saque?");
 		var value = scanner.nextDouble();
+		scanner.nextLine();
 		BankAccount account = bankService.findAccountByUser(userAccount);
 		account.withdraw(value);
 	}
