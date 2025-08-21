@@ -24,11 +24,21 @@ public class User {
         this.cpf = id;
         this.name = name;
     }
-
-    public User() {
+  
+    public User(){
+      this.cpf =""; 
+      this.name = "";
+    }
+  
+    public void setName(String name) {
+        this.name = name;
     }
 
-    /**
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+  
+  /**
      * Retorna o CPF do cliente.
      *
      * @return CPF como String
