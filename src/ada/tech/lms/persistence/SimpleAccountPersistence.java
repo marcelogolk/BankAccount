@@ -77,7 +77,7 @@ public class SimpleAccountPersistence {
     }
 
     private Path getPath() throws IOException {
-        Path caminho = Paths.get("src", "ada", "tech", "lms", "resources", "contas.txt");
+        Path caminho = Paths.get("src","resources", "contas.txt");
         if (!caminho.toFile().exists()) {
             caminho.toFile().createNewFile();
         }

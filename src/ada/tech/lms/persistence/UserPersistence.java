@@ -20,7 +20,7 @@ public class UserPersistence {
         try {
             caminhoArquivo = getPath();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro ao acessar ou criar arquivo usuários.txt", e);
         }
     }
 
@@ -31,7 +31,7 @@ public class UserPersistence {
             writer.write(clienteFormatted);
             writer.newLine();
         } catch (IOException ioException) {
-            throw new RuntimeException();
+            throw new RuntimeException("Erro ao gravar cliente no arquivo usuarios.txt", ioException);
         }
     }
 
@@ -39,13 +39,11 @@ public class UserPersistence {
         List<User> clientes = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(caminhoArquivo)) {
             String linha;
-
             while ((linha = reader.readLine()) != null) {
                 clientes.add(converter(linha));
-
             }
         } catch (IOException ioException) {
-            throw new RuntimeException();
+            throw new RuntimeException("Erro ao ler clientes do arquivo usuarios.txt", ioException);
         }
         return clientes;
     }
@@ -60,8 +58,7 @@ public class UserPersistence {
     }
 
     private Path getPath() throws IOException {
-        Path caminho = Paths.get("src", "ada", "tech", "lms", "resources"
-                , "usuarios.txt");
+        Path caminho = Paths.get("src", "resources", "usuarios.txt");
         if (!caminho.toFile().exists()) {
             caminho.toFile().createNewFile();
         }

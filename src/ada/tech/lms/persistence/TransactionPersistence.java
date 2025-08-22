@@ -110,7 +110,7 @@ public class TransactionPersistence {
     }
 
     private Path getPath() throws IOException {
-        Path caminho = Paths.get("src", "ada", "tech", "lms", "resources", "transacoes.txt");
+        Path caminho = Paths.get("src","resources", "transacoes.txt");
         if (!caminho.toFile().exists()) {
             caminho.toFile().createNewFile();
         }
