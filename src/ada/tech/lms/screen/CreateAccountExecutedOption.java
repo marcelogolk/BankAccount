@@ -2,6 +2,8 @@ package ada.tech.lms.screen;
 
 import ada.tech.lms.domain.SimpleAccount;
 import ada.tech.lms.domain.User;
+import ada.tech.lms.persistence.SimpleAccountPersistence;
+import ada.tech.lms.persistence.UserPersistence;
 import ada.tech.lms.service.BankService;
 import java.util.Random;
 import java.util.Scanner;
@@ -21,19 +23,20 @@ import java.util.Scanner;
  */
 public class CreateAccountExecutedOption implements ExecutedOption {
 
-	private BankService bankService;
-	private Scanner scanner;
+		private BankService bankService;
+		private Scanner scanner;
 
-	/**
-	 * Construtor recebendo as dependências de criação de conta.
-	 *
-	 * @param bankService serviço responsável pelo gerenciamento de contas
-	 * @param scanner     scanner para leitura da entrada do usuário
-	 */
-	public CreateAccountExecutedOption(BankService bankService, Scanner scanner) {
-		this.bankService = bankService;
-		this.scanner = scanner;
-	}
+		private UserPersistence userPersistence;
+		private SimpleAccountPersistence accountPersistence;
+
+		public CreateAccountExecutedOption(BankService bankService, Scanner scanner) {
+			this.bankService = bankService;
+			this.scanner = scanner;
+
+			// Inicializa as classes de persistência
+			this.userPersistence = new UserPersistence();
+			this.accountPersistence = new SimpleAccountPersistence();
+		}
 
 	/**
 	 * Executa a criação da conta:
@@ -42,20 +45,29 @@ public class CreateAccountExecutedOption implements ExecutedOption {
 	 * - Cria um User e SimpleAccount
 	 * - Adiciona a conta ao serviço bancário
 	 */
+
 	@Override
 	public void execute() {
 		String cpf = promptForInput("Informe o CPF", "CPF não pode estar em branco, digite apenas números!");
 		String name = promptForInput("Informe o Nome do usuário", "Nome não pode estar em branco, digite o nome.");
-		try {
-				var generatedAccountNumber = generateAccountNumber();
-				bankService.addAccount(new SimpleAccount(generatedAccountNumber, new User(cpf, name), 0.0));
-				System.out.println("Conta criada com sucesso");
-			}
-			catch (IllegalArgumentException exception) {
-				System.out.println(exception.getMessage());
-			}
 
+		try {
+			var generatedAccountNumber = generateAccountNumber();
+			// Cria usuário e conta
+			var user = new User(cpf, name);
+			var account = new SimpleAccount(generatedAccountNumber, user, 0.0);
+			// Adiciona aos objetos em memória
+			bankService.addAccount(account);
+			// **Grava no arquivo usuarios.txt**
+			userPersistence.add(user);
+			// **Grava no arquivo contas.txt**
+			accountPersistence.add(account);
+			System.out.println("Conta criada com sucesso");
+		} catch (IllegalArgumentException exception) {
+			System.out.println(exception.getMessage());
+		}
 	}
+
 		/**
 		 * Gera número aleatório de 6 dígitos para a conta.
 		 *
