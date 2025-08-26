@@ -24,7 +24,7 @@ O histórico detalhado do projeto está disponível no arquivo [HISTORY.md](HIST
 
 ## Documentação da API (JavaDoc)
 
-A documentação da API gerada pelo JavaDoc estará disponível [aqui](docs/javadoc/index.html) assim que for gerada e adicionada a este repositório.
+A documentação da API gerada pelo JavaDoc estará disponível [aqui](docs/index.html) assim que for gerada e adicionada a este repositório.
 
 ---
 
