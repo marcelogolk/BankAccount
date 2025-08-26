@@ -36,7 +36,11 @@ public class BankService {
      * @param amount valor a ser depositado
      */
     public void deposit(String accountNumber, double amount) {
-        findAccount(accountNumber).deposit(amount);
+        findAccount(accountNumber)
+                .ifPresentOrElse(
+                        account -> account.deposit(amount),
+                        () -> { throw new IllegalArgumentException("Conta não encontrada"); }
+                );
     }
 
     /**
@@ -46,7 +50,11 @@ public class BankService {
      * @param amount valor a ser sacado
      */
     public void withdraw(String accountNumber, double amount) {
-        findAccount(accountNumber).withdraw(amount);
+        findAccount(accountNumber)
+                .ifPresentOrElse(
+                        account -> account.withdraw(amount),
+                        () -> { throw new IllegalArgumentException("Conta não encontrada"); }
+                );
     }
 
     /**
@@ -56,7 +64,9 @@ public class BankService {
      * @return saldo atual da conta
      */
     public double checkBalance(String accountNumber) {
-        return findAccount(accountNumber).getBalance();
+        return findAccount(accountNumber)
+                .map(BankAccount::getBalance)
+                .orElseThrow(() -> new IllegalArgumentException("Conta não encontrada"));
     }
 
     /**
@@ -66,13 +76,12 @@ public class BankService {
      * @return conta bancária correspondente
      * @throws IllegalArgumentException caso a conta não seja encontrada
      */
-    public BankAccount findAccount(String accountNumber) {
+
+    public Optional<BankAccount> findAccount(String accountNumber) {
         return accounts.stream()
                 .filter(account -> account.getAccountNumber().equals(accountNumber))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Conta não encontrada"));
+                .findFirst();
     }
-
     /**
      * Encontra um usuário pelo CPF.
      *
@@ -96,12 +105,9 @@ public class BankService {
      * @return conta bancária do usuário
      * @throws IllegalArgumentException caso nenhuma conta seja encontrada para o usuário
      */
-    public BankAccount findAccountByUser(User user) {
-        for (BankAccount account : accounts) {
-            if (account.getOwner().getCpf().equals(user.getCpf())) {
-                return account;
-            }
-        }
-        throw new IllegalArgumentException("Conta não encontrada para o cliente informado");
+        public Optional<BankAccount> findAccountByUser(User user) {
+        return accounts.stream()
+                .filter(account -> account.getOwner().getCpf().equals(user.getCpf()))
+                .findFirst();
     }
 }
